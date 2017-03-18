@@ -84,19 +84,22 @@ function getformattedLocalTime(area)
     return 'It seems that in "'..area..'" they do not have a concept of time.'
   end
   local localTime, timeZoneId = get_time(lat,lng)
-
-  return "The local time in "..timeZoneId.." is: ".. os.date(dateFormat,localTime) 
+local tim = "The local time in : "
+local mar = '..tim..'
+local txt = "is : "
+local text = '..txt..'
+local timez = '..timeZoneId..'
+local dat = '..os.date(dateFormat,localTime)..'
+  return  mar.." "..timez.."\n"..text.." "..dat
 end
 
 function run(msg, matches)
-  local a = msg['id']
-  local b = getformattedLocalTime(matches[1])
-  reply_msg(a,b,ok_cb,true)
+  return getformattedLocalTime(matches[1])
 end
 
 return {
   description = "Displays the local time in an area", 
-  usage = "/time [area]: Displays the local time in that area",
+  usage = "!time [area]: Displays the local time in that area",
   patterns = {"^/time (.*)$"}, 
   run = run
 }
